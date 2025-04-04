@@ -2,7 +2,7 @@
   "homepage":"https://sousa-diin.github.io/handmarket/",
   "name": "handmarket",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "main.jsx",
   "scripts": {
