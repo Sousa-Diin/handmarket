@@ -7,6 +7,6 @@ export default defineConfig({
   server:{
     port:5173
   },
-  base: "https://sousa-diin.github.io/handmarket/",
+  base: "/",
   
 })
