@@ -11,6 +11,7 @@ function App() {
   return (
     <div className=" flex flex-col  w-[100dvw] h-[100dvh] bg-[#EEF2F0] p-2">
       <h1 className="text-md font-bold text-[#15696F] text-center mb-5">HandMarket</h1>
+      <button>{cart.length}</button>
       <div className="h-[100%] flex flex-col ">
        {/*  <ProductForm /> */}
         <ProductList />
