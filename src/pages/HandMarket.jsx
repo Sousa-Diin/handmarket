@@ -13,6 +13,7 @@ const HandMarket = () => {
   const addToCart = (product) => {
     setCart([...cart, product]);
   };
+  
 
   return (
     <div className="p-4 bg-[#EEF2F0] min-h-screen">
