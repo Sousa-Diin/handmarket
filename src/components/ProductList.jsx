@@ -39,7 +39,7 @@ const ProductList = () => {
   return (
     <div className="flex flex-col felx-nowrap justify-around items-center w-full h-full px-2">
       <aside>
-        <h2 className="text-xl font-semibold text-[#15696F] mb-4">Market</h2>
+        <h2 className="text-xl font-semibold text-[#15696F] text-center mb-4">Market</h2>
         <p className="text-sm text-gray-700">
           Clique nos produtos para adicioná-los ao carrinho.
         </p>
@@ -47,7 +47,7 @@ const ProductList = () => {
       </aside>
 
       <section style={{display: "flex", flexWrap: "wrap"}}
-      className="market-shop bg-amber-300 w-[100%] h-[85dvh] justify-between p-2 rounded-md shadow-md overflow-x-auto gap-2">
+      className="bg-[#c8e9e5] w-[100%] h-[85dvh] justify-between p-2 rounded-md shadow-md overflow-x-auto gap-2">
         {products.map((product) => {
           const isSelected = cart.some((item) => item.id === product.id);
         
@@ -55,7 +55,7 @@ const ProductList = () => {
             <button
               key={product.id}
               onClick={() => addToCart(product)}
-              className={`flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded shadow-md transition-colors lg:w-23 w-26  h-28 ${
+              className={`flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded shadow-md transition-colors lg:w-23 w-26  h-29 ${
                 isSelected
                   ? "bg-red-400 text-white"
                   : "bg-[#63BDB5] text-white hover:bg-[#E59E07]"
