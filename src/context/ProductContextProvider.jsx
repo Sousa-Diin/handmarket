@@ -61,9 +61,27 @@ export const ProductContextProvider = ({ children }) => {
     });
   };
 
+  const decrementCart = (product) => {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+
+      if (existingProduct && existingProduct.quantidade > 1) {
+        // Se já existe e quantidade maior que 1, decrementa
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantidade: item.quantidade - 1 }
+            : item,
+        );
+      } else {
+        // Se não existe ou quantidade é 1, remove do carrinho
+        return prevCart.filter((item) => item.id !== product.id);
+      }
+    });
+  };
+
   return (
     <ProductContext.Provider
-      value={{ products, setProducts, cart, setCart, addToCart }}
+      value={{ products, setProducts, cart, setCart, addToCart, decrementCart }}
     >
       {children}
     </ProductContext.Provider>
