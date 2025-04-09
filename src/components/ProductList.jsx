@@ -34,7 +34,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "../context/ProductContextProvider";
 
 const ProductList = () => {
-  const { products, addToCart, cart } = useContext(ProductContext);
+  const { products, addToCart, cart, removeLocalStorage } = useContext(ProductContext);
 
   return (
     <div className="bg-[#303f47]  flex flex-col felx-nowrap justify-around items-center w-[100%] h-full px-2">
@@ -43,7 +43,7 @@ const ProductList = () => {
         <p className="text-sm ">
           Clique nos produtos para adicioná-los ao carrinho.
         </p>
-        <p > Total de produtos {products.length}</p>
+        <p > Total de produtos {products.length}</p> <button onClick={removeLocalStorage('products')}>Atualizar dados</button>
       </aside>
 
       <section style={{display: "flex", flexWrap: "wrap"}}
@@ -55,7 +55,7 @@ const ProductList = () => {
             <button
               key={product.id}
               onClick={() => addToCart(product)}
-              className={`flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded shadow-md transition-colors lg:w-23 w-26  h-29 ${
+              className={`flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded shadow-md transition-colors lg:w-23 w-30  h-29 ${
                 isSelected
                   ? "bg-red-400 text-white"
                   : "bg-[#63BDB5] text-white hover:bg-[#E59E07]"

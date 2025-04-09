@@ -21,6 +21,14 @@ const getLocalStorage = (key) => {
   }
 };
 
+const removeLocalStorage = (key) => {
+  try {
+    localStorage.removeItem(key);
+  } catch (error) {
+    console.error("Erro ao remover do localStorage:", error);
+  }
+}
+
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // Estado do carrinho
@@ -81,7 +89,7 @@ export const ProductContextProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, setProducts, cart, setCart, addToCart, decrementCart }}
+      value={{ products, setProducts, cart, setCart, addToCart, decrementCart, removeLocalStorage }}
     >
       {children}
     </ProductContext.Provider>
