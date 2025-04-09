@@ -22,7 +22,7 @@ const ProductForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-gray-100 rounded-lg">
+    <form onSubmit={handleSubmit} className="bg-[#303f47]  text-[#c8e9e5] p-4  rounded-lg">
       <input
         type="text"
         placeholder="Nome do Produto"

@@ -10,12 +10,12 @@ function App() {
   const { cart } = useProduct(); // Usa apenas o carrinho, pois produtos já estão no contexto
 
   return (
-    <div className=" flex flex-col  w-[99%] h-[100dvh] bg-[#EEF2F0] p-2">
-      <h1 className="text-md font-bold text-[#15696F] text-center mb-5">
+    <div className=" flex flex-col  w-[100%] h-[100dvh] bg-[#303f47] gap-1 text-[#c8e9e5]">
+      <h1 className="text-md font-bold text-center mb-5">
         HandMarket
       </h1>
-      <span> Total de items do carrinho [{cart.length}]</span>
-      <div className="flex flex-col">
+      <span className="ml-4"> Total de itens na lista [{cart.length}]</span>
+      <div className="main-section w-[100%] flex flex-col bg-[#303f47]  text-[#c8e9e5]" >
          <ProductForm />
         <ProductList />
       </div>

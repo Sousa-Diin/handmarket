@@ -37,17 +37,17 @@ const ProductList = () => {
   const { products, addToCart, cart } = useContext(ProductContext);
 
   return (
-    <div className="flex flex-col felx-nowrap justify-around items-center w-full h-full px-2">
-      <aside>
-        <h2 className="text-xl font-semibold text-[#15696F] text-center mb-4">Market</h2>
-        <p className="text-sm text-gray-700">
+    <div className="bg-[#303f47]  flex flex-col felx-nowrap justify-around items-center w-[100%] h-full px-2">
+      <aside className="w-[100%] p-1">
+        <h2 className="text-xl font-semibold  text-center mb-4">Produtos</h2>
+        <p className="text-sm ">
           Clique nos produtos para adicioná-los ao carrinho.
         </p>
-        <pre> Total de produtos {products.length}</pre>
+        <p > Total de produtos {products.length}</p>
       </aside>
 
       <section style={{display: "flex", flexWrap: "wrap"}}
-      className="bg-[#c8e9e5] w-[100%] h-[85dvh] justify-between p-2 rounded-md shadow-md overflow-x-auto gap-2">
+      className="h-[85dvh] justify-between p-1 rounded-md shadow-md overflow-x-auto gap-2">
         {products.map((product) => {
           const isSelected = cart.some((item) => item.id === product.id);
         
