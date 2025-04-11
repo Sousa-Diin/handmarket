@@ -43,7 +43,7 @@ const ProductList = () => {
             <button
               key={product.id}
               onClick={() => addToCart(product)}
-              className={` flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded  shadow-md transition-colors lg:w-23 w-28  h-29 ${
+              className={` flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded  shadow-md transition-colors w-28  h-29 ${
                 isSelected
                   ? "bg-red-400 text-white "
                   : "bg-[#c8e9e5] text-white hover:bg-[#E59E07]"
