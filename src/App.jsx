@@ -6,11 +6,10 @@ import "./index.css"; // Tailwind
 import { useProduct } from "./context/ProductContextProvider";
 import HandMarket from "./pages/HandMarket";
 import DropdownMenu from "./components/DropdownMenu";
-import { list } from "postcss";
 
 function App() {
   const { cart } = useProduct(); // Carrinho vindo do contexto
-  const [openPage, setOpenPage] = useState("list");
+  const [openPage, setOpenPage] = useState("list"); // Estado para controlar a página aberta
   const [page, setPage] = useState({
     product: <ProductList />, 
     cart: <Cart cart={cart} />,
@@ -25,7 +24,7 @@ function App() {
       <span className="ml-4">
         Total de itens na lista [{cart.length}]
       </span>
-      <div className=" w-full flex flex-col bg-[#303f47] text-[#c8e9e5]">
+      <div className=" w-full  flex flex-col bg-[#303f47] text-[#c8e9e5]">
        {page[openPage]}
       </div>
       <DropdownMenu setOpenPage={setOpenPage} />

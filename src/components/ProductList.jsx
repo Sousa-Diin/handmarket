@@ -35,7 +35,7 @@ const ProductList = () => {
       </aside>
 
       <section style={{display: "flex", flexWrap: "wrap"}}
-      className="h-[85dvh] justify-between p-1 rounded-md shadow-md overflow-x-auto gap-2">
+      className="h-[85dvh] justify-between mb-5 p-1 rounded-md shadow-md overflow-x-auto gap-2">
         {products.map((product) => {
           const isSelected = cart.some((item) => item.id === product.id);
           

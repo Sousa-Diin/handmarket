@@ -7,7 +7,7 @@ const Cart = () => {
   return (
     <div className="w-full bg-[#303f47] p-2 text-[#c8e9e5]">
       <h2>Lista de Compras</h2>
-      <div className="w-[100%] h-[85dvh]  flex flex-wrap gap-1 justify-center items-center overflow-y-auto">
+      <div className="w-[100%] h-[85dvh] mb-5 flex flex-wrap gap-1 justify-center items-center overflow-y-auto">
         {cart.length === 0 ? (
           <p>O carrinho está vazio.</p>
         ) : (
