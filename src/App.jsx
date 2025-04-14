@@ -9,25 +9,22 @@ import DropdownMenu from "./components/DropdownMenu";
 
 function App() {
   const { cart } = useProduct(); // Carrinho vindo do contexto
-  const [openPage, setOpenPage] = useState("list"); // Estado para controlar a página aberta
+  const [openPage, setOpenPage] = useState("main"); // Estado para controlar a página aberta
   const [page, setPage] = useState({
     product: <ProductList />, 
     cart: <Cart cart={cart} />,
     list: <ProductList />,
     addProduct: <ProductForm />,
-    handMarket: <HandMarket />,
+    main: <HandMarket onClick={setOpenPage} />,
   });
 
   return (
-    <div className="flex flex-col items-center w-full h-[100dvh] bg-[#303f47] gap-1 text-[#c8e9e5]">
-      <h2 className="text-md font-bold text-center mb-2">HandMarket</h2>
-      <span className="ml-4">
-        Total de itens na lista [{cart.length}]
-      </span>
-      <div className=" w-full  flex flex-col bg-[#303f47] text-[#c8e9e5]">
+    <div className="flex flex-col items-center  w-full h-[100dvh] bg-[#303f47] gap-1 text-[#c8e9e5]">
+      
+      <div className=" w-full  flex flex-col items-center bg-[#303f47] text-[#c8e9e5]">
        {page[openPage]}
       </div>
-      <DropdownMenu setOpenPage={setOpenPage} />
+      {openPage === 'main' ? '' : (<DropdownMenu setOpenPage={setOpenPage} />)}
     </div>
   );
 }

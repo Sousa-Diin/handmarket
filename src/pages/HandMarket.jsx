@@ -1,57 +1,25 @@
 import React, { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import Hander from "../components/Hader";
+import ButtonAndTitle from "../components/ButtonAndTitle";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
-const HandMarket = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-
-  const addProduct = (name, price) => {
-    const newProduct = { id: products.length + 1, descricao, preco };
-    setProducts([...products, newProduct]);
-  };
-
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-  };
+const HandMarket = ({onClick}) => {
+  const [list, setList] = useState([]);
+  
   
 
   return (
-    <div className="p-4 bg-[#EEF2F0] min-h-screen">
-      <h1 className="text-2xl font-bold text-[#15696F]">HandMarket</h1>
-      <button
-        onClick={() => addProduct("Arroz", 10.99)}
-        className="bg-[#63BDB5] p-2 mt-2 rounded text-white"
-      >
-        Adicionar Produto
-      </button>
-      <div className="mt-4">
-        <h2 className="text-lg text-[#858585]">Produtos Disponíveis:</h2>
-        <ul>
-          {products.map((product) => (
-            <li key={product.id} className="flex justify-between p-2 border-b">
-              {product.descricao} - R${product.preco.toFixed(2)}
-              <button
-                onClick={() => addToCart(product)}
-                className="bg-[#15696F] text-white px-2 py-1 rounded"
-              >
-                Adicionar ao Carrinho
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="mt-4 bg-[#282828] p-4 text-white rounded">
-        <h2 className="text-lg flex items-center">
-          <FaShoppingCart className="mr-2" /> Carrinho
-        </h2>
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index}>
-              {item.descricao} - R${item.preco.toFixed(2)}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="flex flex-col items-center w-full h-full bg-[#303f47] gap-1 text-[#c8e9e5]">
+      <Hander title="Minhas listas" children={null} />
+      <section className="w-[100dvw] h-full overflow-y-auto flex flex-col gap-2 ">
+        <div className="w-[100%] h-full  p-2 shadow-md flex flex-col items-center justify-between gap-2 ">
+          <h5 className="flex justify-between items-center h-[30dvh] w-full bg-[#72b8ad] rounded-md p-2">
+            <p>Lista de compras 1</p>
+            <Icon icon={"mdi:arrow-right"} width="32" height="32" />
+          </h5>
+        </div>
+      </section>
+      <ButtonAndTitle title={'Criar lista'} onClick={onClick}/>
     </div>
   );
 };

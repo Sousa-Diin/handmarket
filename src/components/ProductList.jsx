@@ -22,7 +22,9 @@ const ProductList = () => {
         <p className="text-sm ">
           Clique nos produtos para adicioná-los ao carrinho.
         </p>
-        <p > Total de produtos {products.length}</p> <button onClick={removeLocalStorage('products')}>Atualizar dados</button>
+        <span className="ml-4">
+        Total de itens na lista [{cart.length}]
+      </span>
       </aside>
 
       <section style={{display: "flex", flexWrap: "wrap"}}
