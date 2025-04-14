@@ -1,28 +1,19 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../context/ProductContextProvider";
-import graoscereais from '../assets/png-product/graos-cereais.png'
-import laticinios from '../assets/png-product/laticinios.png'
-import acougue from '../assets/png-product/acougue.png'
-import frios from '../assets/png-product/ffrios.png'
-import higiene from '../assets/png-product/higiene.png'
-import limpeza from '../assets/png-product/limpeza.png'
-import produtos from '../assets/png-product/produtos.png'
-import hortifruti from '../assets/png-product/hortifruti.png'
-import padaria from '../assets/png-product/padaria.png'
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const ProductList = () => {
   const { products, addToCart, cart, removeLocalStorage } = useContext(ProductContext);
-  const listImgProduct = [{
-      GraosCereais: graoscereais ,
-      Acougue: acougue ,
-      Frios: frios,
-      Higiene: higiene,
-      Limpeza: limpeza,
-      Laticinios: laticinios,
-      Outros: produtos,
-      Hortifruti:hortifruti ,
-      Padaria: padaria ,
-   }]
+  const listImgProduct = {
+      GraosCereais: "mdi:sack" ,
+      Acougue: "mdi:food-steak" ,
+      Frios: "mdi:fridge-outline",
+      Higiene: "mdi:shower",
+      Limpeza: "mdi:bucket",
+      Laticinios: "mdi:cheese",
+      Hortifruti:"mdi:food-apple" ,
+      Padaria: "mdi:bread-slice" ,
+   };
 
   return (
     <div className="bg-[#303f47]  flex flex-col felx-nowrap justify-around items-center w-[100%] h-full px-2">
@@ -38,7 +29,7 @@ const ProductList = () => {
       className="h-[85dvh] justify-between mb-5 p-1 rounded-md shadow-md overflow-x-auto gap-2">
         {products.map((product) => {
           const isSelected = cart.some((item) => item.id === product.id);
-          
+          const icone = listImgProduct[product.setores] || "mdi:cart";
           return (
             <button
               key={product.id}
@@ -48,8 +39,9 @@ const ProductList = () => {
                   ? "bg-red-400 text-white "
                   : "bg-[#c8e9e5] text-white hover:bg-[#E59E07]"
               }`}
-              style={{backgroundImage: `url(${listImgProduct[0][product.setores]})`, backgroundSize: 'cover', backgroundPosition: 'center'}}
+             /*  style={{backgroundImage: `url(${listImgProduct[product.setores]})`, backgroundSize: 'cover', backgroundPosition: 'center'}} */
             >
+              <Icon icon={icone} width="32" height="32" />
               <span className="text-sm font-medium text-center">
                 {product.descricao}
               </span>
