@@ -32,6 +32,16 @@ const removeLocalStorage = (key) => {
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // Estado do carrinho
+  const [list, setList] = useState([
+    {name:"Example", products:[]},
+  ]); // Estado da lista de compras
+
+  const generateUUID = () => {
+    return typeof crypto?.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : '_' + Math.random().toString(36).substr(2, 9);
+  };
+  
 
   // Carregar dados ao iniciar
   useEffect(() => {
@@ -49,6 +59,22 @@ export const ProductContextProvider = ({ children }) => {
 
     loadData();
   }, []);
+
+ const addList = (nameList) => {
+    setList((prevList) => {
+      const newList = {
+        id: generateUUID(), // ID único
+        name: nameList || `Lista ${prevList.length + 1}`,
+        products: [],
+      };
+      return [...prevList, newList];
+    });
+  };
+
+
+  const removeList = (id) => {
+    setList((prevList) => prevList.filter((item) => item.id !== id));
+  }
 
   // Adicionar produto ao carrinho e incrementar se já existir
   const addToCart = (product) => {
@@ -89,7 +115,10 @@ export const ProductContextProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, setProducts, cart, setCart, addToCart, decrementCart, removeLocalStorage }}
+      value={{ products, setProducts, 
+               cart, setCart, addToCart, decrementCart, 
+               removeLocalStorage, 
+               list, addList, removeList }}
     >
       {children}
     </ProductContext.Provider>
