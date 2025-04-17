@@ -3,6 +3,8 @@ import Hander from "../components/Hader";
 import ButtonAndTitle from "../components/ButtonAndTitle";
 import ShoppingList from "../components/ShoppingList";
 import { ProductContext } from "../context/ProductContextProvider";
+import ListRecommendations from "../components/ListRecommendations";
+import Container  from "../components/Container";
 
 const HandMarket = ({onClick}) => {
   const { list, addList } = useContext(ProductContext);
@@ -18,9 +20,12 @@ const HandMarket = ({onClick}) => {
         )))}
 
         <ButtonAndTitle title={'Criar lista'} addList={addList}/>
+        
+        <Container>
+          <p className="text-[.9rem] top-[2rem]">Recomendações de lista</p>
+          <ListRecommendations recommendations={[{title: "Lista 1"}, {title: "Lista 2"}, {title: "Lista 3"}, {title: "Lista 4"}]} />
+        </Container>
       </div>
-      <section>
-      </section>
     </div>
   );
 };
