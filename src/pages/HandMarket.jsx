@@ -13,7 +13,7 @@ const HandMarket = ({onClick}) => {
     <div className="flex flex-col items-center justify-between w-full h-full min-h-[100dvh] bg-[#303f47] gap-3 text-[#c8e9e5]">
       <Hander title="Minhas listas" children={null} />
      
-      <div className="my-5 md:my-5 w-[100%] h-full min-h-[90dvh] p-3 shadow-md flex flex-col items-center justify-between gap-2 ">
+      <div style={{marginTop: "5rem"}} className=" md:my-5 w-[100%] h-full min-h-[90dvh] p-2 shadow-md flex flex-col items-center justify-between gap-2 ">
         
         {list.map((item => (
           <ShoppingList  item={item}  onClick={onClick}/>
