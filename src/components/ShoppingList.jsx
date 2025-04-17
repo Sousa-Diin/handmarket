@@ -5,7 +5,7 @@ const ShoppingList = ({ item, onClick }) => {
     onClick('list');
   }
   return (
-    <h5 key={item.id} className="flex justify-between items-center h-[25dvh] w-full bg-[#67918f] rounded-md p-2">
+    <h5 key={item.id} className="flex justify-between items-center h-[45dvh] w-full bg-[#67918f] rounded-md p-2">
       <span>{item.name}</span>
       <IoIosArrowForward onClick={handleChange} className="w-[32px] h-[32px] bg-[#3b473e] rounded-2xl" />
     </h5>
