@@ -33,7 +33,7 @@ export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // Estado do carrinho
   const [list, setList] = useState([
-    {name:"Example", products:[]},
+    {name:"Example", products:['Exemplo 1', 'Exemplo 2','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',]},
   ]); // Estado da lista de compras
 
   const generateUUID = () => {
@@ -60,16 +60,16 @@ export const ProductContextProvider = ({ children }) => {
     loadData();
   }, []);
 
- const addList = (nameList) => {
-    setList((prevList) => {
-      const newList = {
-        id: generateUUID(), // ID único
-        name: nameList || `Lista ${prevList.length + 1}`,
-        products: [],
-      };
-      return [...prevList, newList];
-    });
+  const addList = (nameList) => {
+    const newList = {
+      id: generateUUID(),
+      name: nameList,
+      products: [] // Cada lista tem seu próprio "carrinho"
+    };
+  
+    setList((prevList) => [...prevList, newList]);
   };
+  
 
 
   const removeList = (id) => {

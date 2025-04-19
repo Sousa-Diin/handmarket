@@ -19,7 +19,8 @@ const HandMarket = ({onClick}) => {
           <ShoppingList  item={item}  onClick={onClick}/>
         )))}
 
-        <ButtonAndTitle title={'Criar lista'} addList={addList}/>
+        <ButtonAndTitle title="Criar nova lista" addList={addList} list={list} />
+
         
         <Container>
           <p className="text-[1.5rem] top-[2rem]">Recomendações de lista</p>

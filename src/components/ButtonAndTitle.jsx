@@ -1,18 +1,28 @@
 import { Icon } from '@iconify/react';
 import Notie from '../service/notieService';
-const ButtonAndTitle = ({ title, addList }) => {
+
+const ButtonAndTitle = ({ title, addList, list }) => {
 
   const handleClick = () => {
     Notie.input('Digite o nome da nova lista:', (input) => {
-      if (input) {
-        addList(input);
-        Notie.success(`Lista "${input}" criada com sucesso!`);
-      } else {
-        Notie.error('Nome da lista não pode ser vazio!');
+      const trimmedInput = input?.trim();
+
+      if (!trimmedInput) {
+        Notie.error("Nome da lista não pode ser vazio!");
+        return;
       }
+
+      const listExists = list.some((item) => item.name.toLowerCase() === trimmedInput.toLowerCase());
+      if (listExists) {
+        Notie.error("Já existe uma lista com esse nome!");
+        return;
+      }
+
+      addList(trimmedInput);
+      Notie.success(`Lista "${trimmedInput}" criada com sucesso!`);
     });
-  }
- 
+  };
+
   return (
     <button
       className="w-full h-[10dvh] p-2 shadow rounded bg-[#6a8893] gap-3 flex flex-row items-center justify-center"
@@ -22,6 +32,6 @@ const ButtonAndTitle = ({ title, addList }) => {
       <span>{title}</span>
     </button>
   );
-}
+};
 
 export default ButtonAndTitle;
