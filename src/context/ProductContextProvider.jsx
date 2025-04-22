@@ -66,8 +66,28 @@ export const ProductContextProvider = ({ children }) => {
     {
       setor: "Padaria",
       describe: "Padaria",
+    },{
+      setor: "Adega",
+      describe: "Adega",
+    },
+    {
+      setor: "Bebidas",
+      describe: "Bebidas",
+    },
+    {
+      setor: "Enlatados",
+      describe: "Enlatados",
+    },
+    {
+      setor: "Fitness",
+      describe: "Fitness",
+    },
+    {
+      setor: "Outros",
+      describe: "Outros",
     },
   ]);
+
 
   const listImgProduct = {
     GraosCereais: "mdi:sack" ,
