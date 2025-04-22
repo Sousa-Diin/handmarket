@@ -1,17 +1,19 @@
-import React, { useContext } from "react";
-import { ProductContext } from "../context/ProductContextProvider";
+import React from "react";
+import { useProduct } from "../context/ProductContextProvider";
 
 const Cart = () => {
-  const { cart, addToCart, decrementCart } = useContext(ProductContext);
+  const { addToCart, decrementCart, getLocalStorage } = useProduct();
+  const currentCart = getLocalStorage("selectedList") ?? [];
+  const { buyList } = currentCart;
 
   return (
-    <div className="w-full bg-[#303f47] p-2 text-[#c8e9e5]">
-      <h2>Lista de Compras</h2>
+    <div style={{marginTop: "5rem"}} className="flex flex-col w-full bg-[#303f47] p-2 text-[#c8e9e5]">
+      
       <div className="w-[100%] h-[85dvh] mb-5 flex flex-wrap gap-1 justify-center items-center overflow-y-auto">
-        {cart.length === 0 ? (
+        {buyList.length === 0 ? (
           <p>O carrinho está vazio.</p>
         ) : (
-          cart.map((item) => (
+          buyList.map((item) => (
             <div
               className=" flex flex-col items-center gap-1 rounded shadow justify-between  w-[40%] h-40 p-2  lg:h-35 bg-[#63BDB5] text-white hover:bg-[#E59E07]"
               key={item.id}
