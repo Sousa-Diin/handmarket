@@ -32,9 +32,53 @@ const removeLocalStorage = (key) => {
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]); // Estado do carrinho
-  const [list, setList] = useState([
-    {name:"Example", products:['Exemplo 1', 'Exemplo 2','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',]},
-  ]); // Estado da lista de compras
+  const [list, setList] = useState([]); // Estado da lista de compras
+
+  const [setor, setSetor] = React.useState([
+    {
+      setor: "GraosCereais",
+      describe: "Grãos e Cereais",
+    },
+    {
+      setor: "Acougue",
+      describe: "Açougue",
+    },
+    {
+      setor: "Frios",
+      describe: "Frios",
+    },
+    {
+      setor: "Higiene",
+      describe: "Higiene",
+    },
+    {
+      setor: "Limpeza",
+      describe: "Produtos de Limpeza",
+    },
+    {
+      setor: "Laticinios",
+      describe: "Laticínios",
+    },
+    {
+      setor: "Hortifruti",
+      describe: "Frutas e Verduras",
+    },
+    {
+      setor: "Padaria",
+      describe: "Padaria",
+    },
+  ]);
+
+  const listImgProduct = {
+    GraosCereais: "mdi:sack" ,
+    Acougue: "mdi:food-steak" ,
+    Frios: "mdi:fridge-outline",
+    Higiene: "mdi:shower",
+    Limpeza: "mdi:bucket",
+    Laticinios: "mdi:cheese",
+    Hortifruti:"mdi:food-apple" ,
+    Padaria: "mdi:bread-slice" ,
+  };
 
   const generateUUID = () => {
     return typeof crypto?.randomUUID === 'function'
@@ -43,11 +87,10 @@ export const ProductContextProvider = ({ children }) => {
   };
   
 
-  // Carregar dados ao iniciar
   useEffect(() => {
     const loadData = async () => {
       const stored = getLocalStorage("products");
-
+  
       if (stored && stored.length > 0) {
         setProducts(stored);
       } else {
@@ -56,69 +99,122 @@ export const ProductContextProvider = ({ children }) => {
         setLocalStorage("products", apiData);
       }
     };
-
+  
+    const selectedList = getLocalStorage("buiesList");
+    if (selectedList && selectedList) {
+      setCart(selectedList);
+    }
+  
+    // 🔽 Aqui carregamos as listas de compras salvas
+    const savedLists = getLocalStorage("buiesList") || [];
+    setList(savedLists);
+  
     loadData();
   }, []);
+  
 
   const addList = (nameList) => {
     const newList = {
-      id: generateUUID(),
-      name: nameList,
-      products: [] // Cada lista tem seu próprio "carrinho"
+      listID: generateUUID(),
+      listName: nameList,
+      buyList: [],
     };
   
-    setList((prevList) => [...prevList, newList]);
+    setList((prevList) => {
+      const updatedLists = [...prevList, newList];
+      setLocalStorage("buiesList", updatedLists); // Agora usamos a lista atualizada
+      return updatedLists;
+    });
   };
   
 
+  const addToCart = (product) => {
+    const selectedList = getLocalStorage("selectedList");
+  
+    if (!selectedList || !selectedList.listID) {
+      console.warn("Nenhuma lista selecionada.");
+      return;
+    }
+  
+    const allLists = getLocalStorage("buiesList") || [];
+    const updatedLists = allLists.map((list) => {
+      if (list.listID === selectedList.listID) {
+        const existingProductIndex = list.buyList.findIndex(
+          (item) => item.id === product.id
+        );
+  
+        if (existingProductIndex !== -1) {
+          // Produto já existe, incrementa a quantidade
+          list.buyList[existingProductIndex].quantidade += 1;
+        } else {
+          // Produto novo, adiciona com quantidade 1
+          list.buyList.push({ ...product, quantidade: 1 });
+        }
+  
+        // Atualiza o selectedList também
+        setLocalStorage("selectedList", list);
+      }
+      return list;
+    });
+  
+    setLocalStorage("buiesList", updatedLists);
+    setCart(updatedLists); // (se desejar atualizar o estado do carrinho)
+  };
 
   const removeList = (id) => {
     setList((prevList) => prevList.filter((item) => item.id !== id));
   }
 
-  // Adicionar produto ao carrinho e incrementar se já existir
-  const addToCart = (product) => {
-    setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-
-      if (existingProduct) {
-        // Se já existe, incrementa a quantidade
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantidade: item.quantidade + 1 }
-            : item,
-        );
-      } else {
-        // Se não existe, adiciona com quantidade 1
-        return [...prevCart, { ...product, quantidade: 1 }];
-      }
-    });
+  const sumCartValues = (buyList) => {
+    return buyList.reduce((total, item) => {
+      const price = parseFloat(item.preco) || 0;
+      const quantidade = parseInt(item.quantidade) || 0;
+      return total + price * quantidade;
+    }, 0);
   };
+  
 
   const decrementCart = (product) => {
-    setCart((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-
-      if (existingProduct && existingProduct.quantidade > 1) {
-        // Se já existe e quantidade maior que 1, decrementa
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantidade: item.quantidade - 1 }
-            : item,
+    const selectedList = getLocalStorage("selectedList");
+  
+    if (!selectedList || !selectedList.listID) {
+      console.warn("Nenhuma lista selecionada.");
+      return;
+    }
+  
+    const allLists = getLocalStorage("buiesList") || [];
+    const updatedLists = allLists.map((list) => {
+      if (list.listID === selectedList.listID) {
+        const existingProductIndex = list.buyList.findIndex(
+          (item) => item.id === product.id
         );
-      } else {
-        // Se não existe ou quantidade é 1, remove do carrinho
-        return prevCart.filter((item) => item.id !== product.id);
+  
+        if (existingProductIndex !== -1) {
+          if (list.buyList[existingProductIndex].quantidade > 1) {
+            list.buyList[existingProductIndex].quantidade -= 1;
+          } else {
+            list.buyList.splice(existingProductIndex, 1); // Remove se for 1
+          }
+        }
+  
+        setLocalStorage("selectedList", list);
       }
+      return list;
     });
+  
+    setLocalStorage("buiesList", updatedLists);
+    setCart(updatedLists); // (se você estiver exibindo o carrinho diretamente, mantenha atualizado)
   };
+  
 
   return (
     <ProductContext.Provider
       value={{ products, setProducts, 
                cart, setCart, addToCart, decrementCart, 
-               removeLocalStorage, 
-               list, addList, removeList }}
+               removeLocalStorage, setLocalStorage, getLocalStorage,
+               list, addList, sumCartValues, removeList ,
+              setor, listImgProduct
+            }}
     >
       {children}
     </ProductContext.Provider>

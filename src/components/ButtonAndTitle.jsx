@@ -12,7 +12,7 @@ const ButtonAndTitle = ({ title, addList, list }) => {
         return;
       }
 
-      const listExists = list.some((item) => item.name.toLowerCase() === trimmedInput.toLowerCase());
+      const listExists = list.some((item) => item.listName.toLowerCase() === trimmedInput.toLowerCase());
       if (listExists) {
         Notie.error("Já existe uma lista com esse nome!");
         return;
