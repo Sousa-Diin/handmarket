@@ -1,10 +1,14 @@
 import React from "react";
-import { useProduct } from "../context/ProductContextProvider";
+import { getLocalStorage } from "../utils/localStorage";
+import { useBuyList } from "../hooks/useBuyList";
 
 const Cart = () => {
-  const { addToCart, decrementCart, getLocalStorage } = useProduct();
+  const { addToCart, decrementCart } = useBuyList();
   const currentCart = getLocalStorage("selectedList") ?? [];
   const { buyList } = currentCart;
+  const handleAddProduct = (product) => {
+    addToCart(product);
+  };
 
   return (
     <div style={{marginTop: "5rem"}} className="flex flex-col w-full bg-[#303f47] p-2 text-[#c8e9e5]">
@@ -24,7 +28,7 @@ const Cart = () => {
               <div className="flex flex-row border-2 h-6 p-2 rounded-md justify-around items-center gap-1">
                 <button onClick={() => decrementCart(item)}>-</button>                
                 <span>{item.quantidade}</span>
-                <button onClick={() => addToCart(item)}>+</button>
+                <button onClick={() => handleAddProduct(item)}>+</button>
 
               </div>
             </div>

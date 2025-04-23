@@ -1,14 +1,20 @@
 import React from "react";
 import { useProduct } from "../context/ProductContextProvider";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { getLocalStorage } from "../utils/localStorage";
+import { useBuyList } from "../hooks/useBuyList";
 
 const Product = ({products, img, selectedSector}) => {
 
-  const { addToCart, cart, getLocalStorage } = useProduct();
+  const { addToCart } = useBuyList();
   // Filtra os produtos com base no setor selecionado
   const list = products.filter((item) => item.setores === selectedSector);
   const currentCart = getLocalStorage("selectedList") ?? [];
   const { buyList } = currentCart;
+
+  const handleAddProduct = (product) => {
+    addToCart(product);
+  };
   return(
     <>
      
@@ -22,7 +28,7 @@ const Product = ({products, img, selectedSector}) => {
             return (
               <button
                 key={product.id}
-                onClick={() => addToCart(product)}
+                onClick={() => handleAddProduct(product)}
                 className={` flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded  shadow-md transition-colors w-28  h-29 ${
                   isSelected
                     ? "bg-red-400 text-white "

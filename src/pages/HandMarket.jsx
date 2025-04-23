@@ -2,12 +2,13 @@ import React from "react";
 import Hander from "../components/Hader";
 import ButtonAndTitle from "../components/ButtonAndTitle";
 import ShoppingList from "../components/ShoppingList";
-import { useProduct } from "../context/ProductContextProvider";
 import ListRecommendations from "../components/ListRecommendations";
 import Container  from "../components/Container";
+import { useBuyList } from "../hooks/useBuyList";
+import { getLocalStorage } from "../utils/localStorage";
 
 const HandMarket = ({onClick}) => {
-  const { list, addList, getLocalStorage } = useProduct();
+  const { lists, addList } = useBuyList();
   const allBuiesList = getLocalStorage("buiesList") ?? [];
   
   return (
@@ -30,7 +31,7 @@ const HandMarket = ({onClick}) => {
           )}
         </>
 
-        <ButtonAndTitle title="Criar nova lista" addList={addList} list={list} />
+        <ButtonAndTitle title="Criar nova lista" addList={addList} list={lists} />
 
         
         <Container>

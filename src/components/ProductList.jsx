@@ -1,12 +1,12 @@
 import {useState} from "react";
 import { useProduct } from "../context/ProductContextProvider";
-import Product from "./Product";
+import { getLocalStorage } from "../utils/localStorage";
 import SelectSetor from "./SelectSetor";
 import Cart from "./Cart";
 import Hander from "./Hader";
 
 const ProductList = () => {
-  const { products, cart, setor, listImgProduct, getLocalStorage} = useProduct();
+  const { setor, listImgProduct} = useProduct();
 
   const [page, setPage] = useState(true); //seta a pagina atual do componente ProductList
   const [selectedSector, setSelectedSector] = useState("GraosCereais"); //captura o setor selecionado
