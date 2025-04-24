@@ -29,7 +29,7 @@ const ButtonAndTitle = ({ title, addList, list }) => {
       onClick={handleClick}
     >
       <Icon icon="mdi:add" width={"40px"} className='rounded-2xl bg-[#303f47]' />
-      <span>{title}</span>
+      <span className='text-[1rem]'>{title}</span>
     </button>
   );
 };

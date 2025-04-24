@@ -61,7 +61,7 @@ const SelectSetor = () => {
                   : "bg-[#c8e9e5] text-black hover:bg-[#303f47] hover:text-white"
               }`}
             >
-              <span className="text-sm font-medium">{item.describe}</span>
+              <span className="text-[1.2rem]">{item.describe}</span>
             </button>
 
             {isExpanded && (
