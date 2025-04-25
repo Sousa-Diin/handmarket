@@ -7,7 +7,7 @@ export const ProductContext = createContext();
 
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
-  const [setor, setSetor] = React.useState([
+  const [setor, setSetor] = useState([
     {
       setor: "GraosCereais",
       describe: "Grãos e Cereais",
