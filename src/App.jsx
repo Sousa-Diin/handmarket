@@ -6,12 +6,14 @@ import "./index.css"; // Tailwind
 import { useProduct } from "./context/ProductContextProvider";
 import HandMarket from "./pages/HandMarket";
 import DropdownMenu from "./components/DropdownMenu";
+import AllListsViewer from "./pages/AllListViewer";
 
 function App() {
   const { cart } = useProduct(); // Carrinho vindo do contexto
   const [openPage, setOpenPage] = useState("main"); // Estado para controlar a página aberta
   const [page, setPage] = useState({
     product: <ProductList />, 
+    allList: <AllListsViewer />,
     cart: <Cart cart={cart} />,
     list: <ProductList />,
     addProduct: <ProductForm />,
