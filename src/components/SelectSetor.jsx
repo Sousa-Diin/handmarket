@@ -65,7 +65,7 @@ const SelectSetor = () => {
             </button>
 
             {isExpanded && (
-              <div className="pl-4 pt-2">
+              <div className=" pt-2">
                 <Product
                   products={products}
                   img={listImgProduct}

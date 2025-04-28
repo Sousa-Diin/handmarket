@@ -27,7 +27,7 @@ const Product = ({products, img, selectedSector}) => {
               <button
                 key={product.id}
                 onClick={() => handleAddProduct(product)}
-                className={` flex-shrink-0 flex flex-col items-center justify-center gap-1 p-2 rounded  shadow-md transition-colors w-28  h-29 ${
+                className={` flex-shrink-0 flex flex-col items-center justify-between  gap-1 p-2 rounded  shadow-md transition-colors w-[31%] h-30 ${
                   isSelected
                     ? "bg-red-400 text-white "
                     : "bg-[#72b8ad] text-white hover:bg-[#E59E07]"
@@ -38,7 +38,7 @@ const Product = ({products, img, selectedSector}) => {
                 <span className="text-sm font-medium text-center">
                   {product.descricao}
                 </span>
-                <span className="text-sm text-center">{product.preco}</span>
+                <span className="text-sm text-center">R$ {product.preco}</span>
               </button>
             );
           })}

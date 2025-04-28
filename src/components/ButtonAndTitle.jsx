@@ -1,8 +1,9 @@
 import { Icon } from '@iconify/react';
 import Notie from '../service/notieService';
+import { useProduct } from '../context/ProductContextProvider';
 
 const ButtonAndTitle = ({ title, addList, list }) => {
-
+  const { pageColor } = useProduct();
   const handleClick = () => {
     Notie.input('Digite o nome da nova lista:', (input) => {
       const trimmedInput = input?.trim();
@@ -25,11 +26,12 @@ const ButtonAndTitle = ({ title, addList, list }) => {
 
   return (
     <button
-      className="w-full h-[10dvh] p-2 shadow rounded bg-[#6a8893] gap-3 flex flex-row items-center justify-center"
+    style={{backgroundColor: pageColor.accent }}
+      className="w-full h-[10dvh] p-2 rounded gap-3 flex flex-row items-center justify-center"
       onClick={handleClick}
     >
-      <Icon icon="mdi:add" width={"40px"} className='rounded-2xl bg-[#303f47]' />
-      <span className='text-[1rem]'>{title}</span>
+      <Icon icon="mdi:add" width={"40px"} style={{backgroundColor: pageColor.secondary}} className='rounded-2xl ' />
+      <span className='text-[1.5rem]'>{title}</span>
     </button>
   );
 };

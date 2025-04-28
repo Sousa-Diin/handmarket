@@ -1,14 +1,21 @@
-/*
- * Paleta de cor OGGI
 
-*/
 
 :root {
-  --color-primary: #eb6d73;
-  --color-secondary: #72b8ad;
-  --color-secondary-dark: #67918f;
+  --color-primary: #141414; /* Preto do fundo dos cards e tela */
+  --color-secondary: #202020; /* Cinza muito escuro do fundo geral */
+  --color-tertiary: #2c2c2c; /* Cinza escuro de destaque (barras, seções) */
+  --color-accent: #f97316; /* Laranja vibrante (botões e indicadores) */
+  --color-info: #16a34a; /* Verde dos indicadores de saldo */
+  --color-highlight: #7e22ce; /* Roxo usado em gráficos */
+  --color-warning: #eab308; /* Amarelo de alerta */
+  --color-danger: #dc2626; /* Vermelho de alerta */
+  --color-light: #f2f2f2; /* Cinza bem claro (textos e detalhes) */
+
+  --color-primary-light: #eb6d73;
+  --color-secondary-light: #72b8ad;
+  --color-secondary-light: #67918f;
   --color-white: #c8e9e5;
-  --color-dark: #303f47;
+  --color-dark-light: #303f47;
   --color-light: #f4f4f4;
 
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
@@ -31,4 +38,14 @@
 }
 
 .main-section { 
-  background-color: var(--color-dark);}
+  background-color: var(--color-secondary);}
+
+
+  /* 
+  salmon: "#eb6d73",
+  cardLight: "#72b8ad",
+  cardDark: "#67918f",
+  cardLeve: "#c8e9e5",
+  cardExDark: "#303f47",
+  
+  */

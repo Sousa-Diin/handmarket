@@ -69,8 +69,8 @@ const AllListsViewer = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full p-1">
-      <h2 className="text-xl font-bold mb-4">Minhas Listas de Compras</h2>
+    <div className="flex flex-col gap-1 w-full p-1">
+      <h4 className="text-xl font-bold mb-4">Pedido de Compras</h4>
 
       {lists.map((list) => {
         const { totalValue, totalQuantity } = calculateTotals(list);
@@ -79,11 +79,11 @@ const AllListsViewer = () => {
         const allChecked = checkedCount === list.buyList.length && list.buyList.length > 0;
 
         return (
-          <div key={list.listID} className="border rounded-lg shadow-sm p-4 bg-white">
+          <div key={list.listID} className=" border rounded-lg shadow-sm p-4 bg-white">
             <aside>
               <button
                 onClick={() => handleSelectList(list.listID)}
-                className="w-full text-left text-lg font-semibold text-[#15696F] hover:underline"
+                className="w-full text-left text-[1.3rem] font-semibold text-[#15696F] hover:underline"
               >
                 {list.listName}
               </button>
@@ -129,7 +129,7 @@ const AllListsViewer = () => {
                             isChecked ? "bg-green-100 line-through" : ""
                           }`}
                         >
-                          <label className="flex items-center gap-2 w-[80%] cursor-pointer">
+                          <label className="flex items-center gap-2 w-[60%] lg:w-[75%] cursor-pointer">
                             <input
                               type="checkbox"
                               checked={isChecked}
@@ -140,7 +140,7 @@ const AllListsViewer = () => {
                           <span className="w-[5%] text-gray-600 font-semibold">
                             x{item.quantidade}
                           </span>
-                          <span className="w-[6%] text-gray-500 text-xs ml-4">
+                          <span className="text-gray-500 text-xs ml-2">
                             R$ {(item.preco * item.quantidade).toFixed(2)}
                           </span>
                         </div>

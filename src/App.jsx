@@ -9,7 +9,7 @@ import DropdownMenu from "./components/DropdownMenu";
 import AllListsViewer from "./pages/AllListViewer";
 
 function App() {
-  const { cart } = useProduct(); // Carrinho vindo do contexto
+  const { cart, pageColor } = useProduct(); // Carrinho vindo do contexto
   const [openPage, setOpenPage] = useState("main"); // Estado para controlar a página aberta
   const [page, setPage] = useState({
     product: <ProductList />, 
@@ -21,9 +21,9 @@ function App() {
   });
 
   return (
-    <div className="flex flex-col items-center  w-full h-[100dvh] bg-[#303f47] gap-1 text-[#c8e9e5]">
+    <div style={{backgroundColor: pageColor.secondary}} className="flex flex-col items-center  w-full h-[100dvh] gap-1 text-[#c8e9e5]">
       
-      <div className=" w-full  flex flex-col items-center bg-[#303f47] text-[#c8e9e5]">
+      <div className=" w-full  flex flex-col items-center text-[#c8e9e5]">
        {page[openPage]}
       </div>
       {openPage === 'main' ? '' : (<DropdownMenu setOpenPage={setOpenPage} />)}

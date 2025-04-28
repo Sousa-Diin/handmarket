@@ -1,12 +1,14 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { ListProducts } from "../../backend/ListProducts";
 import { setLocalStorage, getLocalStorage } from "../utils/localStorage";
+import { dark, light } from "../utils/colors.js";
 
 export const ProductContext = createContext();
 
 
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [pageColor, setPageColor] = useState(dark);
   const [setor, setSetor] = useState([
     {
       setor: "GraosCereais",
@@ -61,6 +63,9 @@ export const ProductContextProvider = ({ children }) => {
     },
   ]);
 
+  const handleChangeColor = () => {
+    setPageColor(prevColor => (prevColor === dark ? light : dark));
+  }
 
   const listImgProduct = {
     GraosCereais: "mdi:sack" ,
@@ -78,15 +83,10 @@ export const ProductContextProvider = ({ children }) => {
 
   useEffect(() => {
     const loadData = async () => {
-      const stored = getLocalStorage("products");
-  
-      if (stored && stored.length > 0) {
-        setProducts(stored);
-      } else {
-        const apiData = await ListProducts();
-        setProducts(apiData);
-        setLocalStorage("products", apiData);
-      }
+      const apiData = await ListProducts();
+      setProducts(apiData);
+      setLocalStorage("products", apiData);
+    
     };
   
     loadData();
@@ -95,7 +95,7 @@ export const ProductContextProvider = ({ children }) => {
 
   return (
     <ProductContext.Provider
-      value={{ products, setProducts, setor, setSetor, listImgProduct, }}
+      value={{ products, setProducts, setor, setSetor, listImgProduct, pageColor,handleChangeColor }}
     >
       {children}
     </ProductContext.Provider>

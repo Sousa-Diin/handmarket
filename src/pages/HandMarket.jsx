@@ -3,40 +3,57 @@ import Hander from "../components/Hader";
 import ButtonAndTitle from "../components/ButtonAndTitle";
 import ShoppingList from "../components/ShoppingList";
 import ListRecommendations from "../components/ListRecommendations";
-import Container  from "../components/Container";
+import Container from "../components/Container";
 import { useBuyList } from "../hooks/useBuyList";
 import { getLocalStorage } from "../utils/localStorage";
+import { useProduct } from "../context/ProductContextProvider";
 
-const HandMarket = ({onClick}) => {
+const HandMarket = ({ onClick }) => {
   const { lists, addList } = useBuyList();
   const allBuiesList = getLocalStorage("buiesList") ?? [];
-  
+  const { pageColor, handleChangeColor } = useProduct();
+
   return (
-    <div className="flex flex-col items-center justify-between w-full h-full min-h-[100dvh] bg-[#303f47] gap-3 text-[#c8e9e5]">
-      <Hander title="Minhas Listas de Compras" children={null} />
-     
-      <div style={{marginTop: "5rem"}} className=" md:my-5 w-[100%] h-full min-h-[90dvh] p-2 shadow-md flex flex-col items-center justify-between gap-2 ">
+    <div
+      style={{
+        backgroundColor: pageColor.secondary,
+        color: pageColor.light,
+      }}
+      className="flex flex-col items-center justify-between w-full h-full min-h-[100dvh] gap-3"
+    >
+      <Hander
+        title="Minhas Listas de Compras"
+        children={<button onClick={handleChangeColor} style={{ color: pageColor.accent, fontSize: "1.2rem" }}>Editar</button>}
+      />
+
+      <div
+        style={{
+          marginTop: "5rem",
+          backgroundColor: pageColor.secondary,
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+        }}
+        className="md:my-5 w-[100%] h-full min-h-[90dvh] p-2 flex flex-col items-center justify-between gap-2"
+      >
         {allBuiesList.length === 0 ? (
-          <p className="text-[1.5rem] top-[2rem]">Nenhuma lista criada.</p>
+          <p className="text-[1.5rem] mt-8">Nenhuma lista criada.</p>
         ) : (
-          null
+          allBuiesList.map((item, index) => (
+            <ShoppingList key={index} item={item} onClick={onClick} />
+          ))
         )}
-        <>
-          {allBuiesList.length === 0 ? (
-            <p>O carrinho está vazio.</p>
-          ) : (
-            allBuiesList.map((item => (
-              <ShoppingList  item={item}  onClick={onClick}/>
-            )))
-          )}
-        </>
 
         <ButtonAndTitle title="Criar nova lista" addList={addList} list={lists} />
 
-        
         <Container>
-          <p className="text-[1.5rem] top-[2rem]">Recomendações de lista</p>
-          <ListRecommendations recommendations={[{title: "Lista 1"}, {title: "Lista 2"}, {title: "Lista 3"}, {title: "Lista 4"}]} />
+          <p className="text-[1.5rem]">Recomendações de lista</p>
+          <ListRecommendations
+            recommendations={[
+              { title: "Lista 1" },
+              { title: "Lista 2" },
+              { title: "Lista 3" },
+              { title: "Lista 4" },
+            ]}
+          />
         </Container>
       </div>
     </div>
@@ -44,3 +61,4 @@ const HandMarket = ({onClick}) => {
 };
 
 export default HandMarket;
+
