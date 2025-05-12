@@ -51,16 +51,16 @@ function handleDelete(e) {
   const deleteItemSheet = SpreadsheetApp.openById(sheetID);
   const sheet = deleteItemSheet.getSheetByName('Products');
   const data = sheet.getDataRange().getValues();
-  
+
   try {
     const id = e.parameter.id;
     let found = false;
-  
+
     for (let i = 1; i < data.length; i++) {
       if (data[i][0].toString() === id.toString()) {
         sheet.deleteRow(i + 1); // i+1 porque o índice do array começa em 0, mas planilha começa em 1
         found = true;
-      
+
         return response({
           status: 200,
           message: 'Item deletado com sucesso.',
@@ -68,7 +68,7 @@ function handleDelete(e) {
         });
       }
     }
-  
+
     if (!found) {
       return response({
         status: 404,
@@ -76,7 +76,61 @@ function handleDelete(e) {
         id
       });
     }
-  
+
+  } catch (error) {
+    return response({
+      status: 500,
+      message: 'Erro interno: ' + error.message
+    });
+  }
+}
+
+
+// atualiza o produto
+function handleUpdate(e) {
+  const sheetID = getDatabaseId();
+  const sheet = SpreadsheetApp.openById(sheetID).getSheetByName('Products');
+  const data = sheet.getDataRange().getValues();
+
+  try {
+    const headers = data[0].map(h => h.toString().toLowerCase());
+    const id = e.parameter.id;
+
+    if (!id) {
+      return response({
+        status: 400,
+        message: 'Parâmetro "id" é obrigatório.'
+      });
+    }
+
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      if (row[headers.indexOf('id')].toString() === id.toString()) {
+        // Atualiza todos os parâmetros que existem na planilha
+        const updates = {};
+        for (const key in e.parameter) {
+          if (key !== 'id' && headers.includes(key.toLowerCase())) {
+            const colIndex = headers.indexOf(key.toLowerCase()) + 1; // +1 porque getRange é 1-based
+            sheet.getRange(i + 1, colIndex).setValue(e.parameter[key]);
+            updates[key] = e.parameter[key];
+          }
+        }
+
+        return response({
+          status: 200,
+          message: 'Item atualizado com sucesso.',
+          id,
+          updated: updates
+        });
+      }
+    }
+
+    return response({
+      status: 404,
+      message: 'ID não encontrado.',
+      id
+    });
+
   } catch (error) {
     return response({
       status: 500,
