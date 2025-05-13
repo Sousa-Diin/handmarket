@@ -1,0 +1,11 @@
+function setupAllSheets() {
+  const spreadsheetID = setupDatabase('handmarket_DB');
+  createSheetIfNotExists('Products', [
+      'ID', 'COD', 'DESCRIPTION', 'DESCRIPTION_NFCE',
+      'SECTOR', 'COUNT', 'UN', 'PRICE', 'CREATED_AT'
+    ]);
+  createSheetIfNotExists('Logs', ['Data',	'Usuário',	'Ação',	'Entidade',	'ID_Entidade',	'Observações']);
+  createSheetIfNotExists('Settings', ['Chave',	'Valor']);
+  createSheetIfNotExists('Orders', ['ID_Pedido',	'ID_Usuário','	Data_Pedido',	'IDs_Produtos',	'Valor_Total',	'Status']);
+  createSheetIfNotExists('Users', ['ID_Nome',	'E-mail',	'Telefone',	'Status']);
+}
