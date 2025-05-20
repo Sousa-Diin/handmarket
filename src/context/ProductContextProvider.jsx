@@ -10,57 +10,26 @@ export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [pageColor, setPageColor] = useState(dark);
   const [setor, setSetor] = useState([
-    {
-      setor: "GraosCereais",
-      describe: "Grãos e Cereais",
-    },
-    {
-      setor: "Acougue",
-      describe: "Açougue",
-    },
-    {
-      setor: "Frios",
-      describe: "Frios",
-    },
-    {
-      setor: "Higiene",
-      describe: "Higiene",
-    },
-    {
-      setor: "Limpeza",
-      describe: "Produtos de Limpeza",
-    },
-    {
-      setor: "Laticinios",
-      describe: "Laticínios",
-    },
-    {
-      setor: "Hortifruti",
-      describe: "Frutas e Verduras",
-    },
-    {
-      setor: "Padaria",
-      describe: "Padaria",
-    },{
-      setor: "Adega",
-      describe: "Adega",
-    },
-    {
-      setor: "Bebidas",
-      describe: "Bebidas",
-    },
-    {
-      setor: "Enlatados",
-      describe: "Enlatados",
-    },
-    {
-      setor: "Fitness",
-      describe: "Fitness",
-    },
-    {
-      setor: "Outros",
-      describe: "Outros",
-    },
+    {setor: "GraosCereais", describe: "Grãos e Cereais"},
+    {setor: "Acougue", describe: "Açougue"},
+    {setor: "Frios", describe: "Frios"},
+    {setor: "Higiene", describe: "Higiene"},
+    {setor: "Limpeza", describe: "Produtos de Limpeza"},
+    {setor: "Laticinios", describe: "Laticínios"},
+    {setor: "Hortifruti", describe: "Frutas e Verduras"},
+    {setor: "Padaria", describe: "Padaria"},
+    {setor: "Adega", describe: "Adega"},
+    {setor: "Bebidas", describe: "Bebidas"},
+    {setor: "Enlatados", describe: "Enlatados"},
+    {setor: "Fitness", describe: "Fitness"},
+    {setor: "Outros", describe: "Outros"},
+    {setor: "Bazar", describe: "Bazar"},
+    {setor: "Pets", describe: "Pets"},
+    {setor: "Bebes", describe: "Bebês"},
+    {setor: "Doces", describe: "Doces e Chocolates"},
+    {setor: "Perfumaria", describe: "Perfumaria"},
+    {setor: "Utilidades", describe: "Utilidades"},
+    {setor: "Biscoitos", describe: "Biscoitos e Bolachas"}
   ]);
 
   const handleChangeColor = () => {

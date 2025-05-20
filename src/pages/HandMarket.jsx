@@ -48,10 +48,10 @@ const HandMarket = ({ onClick }) => {
           <p className="text-[1.5rem]">Recomendações de lista</p>
           <ListRecommendations
             recommendations={[
-              { title: "Lista 1" },
-              { title: "Lista 2" },
-              { title: "Lista 3" },
-              { title: "Lista 4" },
+              { title: "Compra do mês" },
+              { title: "Churrasco" },
+              { title: "Lasanha" },
+              { title: "Guloseimas" },
             ]}
           />
         </Container>
