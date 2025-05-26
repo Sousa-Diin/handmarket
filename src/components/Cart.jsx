@@ -24,11 +24,11 @@ const Cart = () => {
               key={item.id}
               className="flex flex-col items-center gap-1 rounded shadow justify-between w-[30%] h-40 p-2 lg:h-35 bg-[#63BDB5] text-white hover:bg-[#E59E07]"
             >
-              <h7>{item.descricao}</h7>
-              <p>R$ {(Number(item.preco) * item.quantidade).toFixed(2)}</p>
+              <h7>{item.description}</h7>
+              <p>R$ {(Number(item.price) * item.count).toFixed(2)}</p>
               <div className="flex flex-row border-2 h-6 p-2 rounded-md justify-around items-center gap-1">
                 <button onClick={() => handleDecrementProduct(item)}>-</button>
-                <span>{item.quantidade}</span>
+                <span>{item.count}</span>
                 <button onClick={() => handleAddProduct(item)}>+</button>
               </div>
             </div>

@@ -5,12 +5,12 @@ import { setLocalStorage, getLocalStorage } from "../utils/localStorage";
 
 const ProductForm = () => {
   const { setProducts, setor } = useProduct();
-  const [product, setProduct] = useState({ descricao: "", preco: "",setores: "" });
+  const [product, setProduct] = useState({ description: "", price: "",sector: "" });
   const oldProducts = getLocalStorage("products") || []; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!product.descricao || !product.preco || !product.setores) { 
+    if (!product.description || !product.price || !product.sector) { 
       Notie.error("Preencha todos os campos");
       return;
     }
@@ -19,9 +19,9 @@ const ProductForm = () => {
       ...prevProducts,
       {
         id: prevProducts.length + 1,
-        descricao: product.descricao,
-        preco: parseFloat(product.preco), 
-        setores: product.setores,
+        description: product.description,
+        price: parseFloat(product.price), 
+        sector: product.sector,
       },
     ]);
 
@@ -29,13 +29,13 @@ const ProductForm = () => {
       ...oldProducts,
       {
         id: oldProducts.length + 1,
-        descricao: product.descricao,
-        preco: parseFloat(product.preco),
-        setores: product.setores,
+        description: product.description,
+        price: parseFloat(product.price),
+        sector: product.sector,
       },
     ]);
     Notie.success("Produto adicionado com sucesso");
-    setProduct({ descricao: "", preco: "", setores: "" }); // Reset the form fields
+    setProduct({ description: "", price: "", sector: "" }); // Reset the form fields
   };
 
   return (
@@ -44,26 +44,26 @@ const ProductForm = () => {
         <input
           type="text"
           placeholder="Nome do Produto"
-          value={product.descricao}
-          onChange={(e) => setProduct({ ...product, descricao: (e.target.value).toUpperCase() })}
+          value={product.description}
+          onChange={(e) => setProduct({ ...product, description: (e.target.value).toUpperCase() })}
           className="border p-2 rounded w-full mb-2"
         />
         <input
           type="number"
           placeholder="Preço"
-          value={product.preco}
-          onChange={(e) => setProduct({ ...product, preco: e.target.value })}
+          value={product.price}
+          onChange={(e) => setProduct({ ...product, price: e.target.value })}
           className=" border p-2 rounded w-full mb-2"
         />
         <select
-          value={product.setores}
-          onChange={(e) => setProduct({ ...product, setores: e.target.value })}
+          value={product.sector}
+          onChange={(e) => setProduct({ ...product, sector: e.target.value })}
           className="border p-2 rounded w-full mb-2"
         >
           <option value="">Selecione o Setor</option>
           {setor.map((item) => (
-            <option key={item.setor} value={item.setor}>
-              {item.describe}
+            <option key={item.sector} value={item.sector}>
+              {item.description}
             </option>
           ))}
         </select>

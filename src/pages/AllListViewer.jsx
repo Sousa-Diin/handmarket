@@ -51,8 +51,8 @@ const AllListsViewer = () => {
     let totalQuantity = 0;
 
     list.buyList.forEach((item) => {
-      totalValue += item.preco * item.quantidade;
-      totalQuantity += item.quantidade;
+      totalValue += item.price * item.count;
+      totalQuantity += item.count;
     });
 
     return { totalValue, totalQuantity };
@@ -62,7 +62,7 @@ const AllListsViewer = () => {
     const checked = checkedItems[list.listID] || [];
     return list.buyList.reduce((remaining, item) => {
       if (!checked.includes(item.id)) {
-        return remaining + item.preco * item.quantidade;
+        return remaining + item.price * item.count;
       }
       return remaining;
     }, 0);
@@ -135,13 +135,13 @@ const AllListsViewer = () => {
                               checked={isChecked}
                               onChange={() => toggleItem(list.listID, item.id)}
                             />
-                            <span className="ml-2 text-gray-800">{item.descricao}</span>
+                            <span className="ml-2 text-gray-800">{item.description}</span>
                           </label>
                           <span className="w-[5%] text-gray-600 font-semibold">
-                            x{item.quantidade}
+                            x{item.count}
                           </span>
                           <span className="text-gray-500 text-xs ml-2">
-                            R$ {(item.preco * item.quantidade).toFixed(2)}
+                            R$ {(item.price * item.count).toFixed(2)}
                           </span>
                         </div>
                       );

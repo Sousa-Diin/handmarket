@@ -7,7 +7,7 @@ const Product = ({products, img, selectedSector}) => {
 
   const { selectedList, setSelectedList, addToCart } = useBuyList();
   // Filtra os produtos com base no setor selecionado
-  const list = products.filter((item) => item.setores === selectedSector);
+  const list = products.filter((item) => item.sector === selectedSector);
   const buyList = selectedList?.buyList ?? [];
 
   const handleAddProduct = (product) => {
@@ -22,7 +22,7 @@ const Product = ({products, img, selectedSector}) => {
                overflow-x-auto gap-2">
         {list.map((product) => {
             const isSelected = buyList.some((item) => item.id === product.id);
-            const icone = img[product.setores] || "mdi:cart";
+            const icone = img[product.sector] || "mdi:cart";
             return (
               <button
                 key={product.id}
@@ -36,9 +36,9 @@ const Product = ({products, img, selectedSector}) => {
               >
                 <Icon icon={icone} width="32" height="32" />
                 <span className="text-sm font-medium text-center">
-                  {product.descricao}
+                  {product.description}
                 </span>
-                <span className="text-sm text-center">R$ {product.preco}</span>
+                <span className="text-sm text-center">R$ {product.price}</span>
               </button>
             );
           })}

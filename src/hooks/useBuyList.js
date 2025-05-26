@@ -42,9 +42,9 @@ export function useBuyList() {
         const index = list.buyList.findIndex((item) => item.id === product.id);
 
         if (index !== -1) {
-          list.buyList[index].quantidade += 1;
+          list.buyList[index].count += 1;
         } else {
-          list.buyList.push({ ...product, quantidade: 1 });
+          list.buyList.push({ ...product, count: 1 });
         }
 
         setSelectedList({ ...list });
@@ -66,9 +66,9 @@ export function useBuyList() {
         const index = list.buyList.findIndex((item) => item.id === product.id);
   
         if (index !== -1) {
-          list.buyList[index].quantidade -= 1;
+          list.buyList[index].count -= 1;
   
-          if (list.buyList[index].quantidade <= 0) {
+          if (list.buyList[index].count <= 0) {
             list.buyList.splice(index, 1); // remove do array
           }
   
@@ -125,7 +125,7 @@ export function useBuyList() {
     if (!list) return 0;
 
     return list.buyList.reduce(
-      (sum, item) => sum + item.preco * item.quantidade,
+      (sum, item) => sum + item.price * item.count,
       0
     );
   };

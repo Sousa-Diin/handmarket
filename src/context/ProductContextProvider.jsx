@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { ListProducts } from "../../backend/ListProducts";
+import { googleScriptClient } from "../api/googleScriptClient.js";
 import { setLocalStorage, getLocalStorage } from "../utils/localStorage";
 import { dark, light } from "../utils/colors.js";
 
@@ -10,26 +11,26 @@ export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [pageColor, setPageColor] = useState(dark);
   const [setor, setSetor] = useState([
-    {setor: "GraosCereais", describe: "Grãos e Cereais"},
-    {setor: "Acougue", describe: "Açougue"},
-    {setor: "Frios", describe: "Frios"},
-    {setor: "Higiene", describe: "Higiene"},
-    {setor: "Limpeza", describe: "Produtos de Limpeza"},
-    {setor: "Laticinios", describe: "Laticínios"},
-    {setor: "Hortifruti", describe: "Frutas e Verduras"},
-    {setor: "Padaria", describe: "Padaria"},
-    {setor: "Adega", describe: "Adega"},
-    {setor: "Bebidas", describe: "Bebidas"},
-    {setor: "Enlatados", describe: "Enlatados"},
-    {setor: "Fitness", describe: "Fitness"},
-    {setor: "Outros", describe: "Outros"},
-    {setor: "Bazar", describe: "Bazar"},
-    {setor: "Pets", describe: "Pets"},
-    {setor: "Bebes", describe: "Bebês"},
-    {setor: "Doces", describe: "Doces e Chocolates"},
-    {setor: "Perfumaria", describe: "Perfumaria"},
-    {setor: "Utilidades", describe: "Utilidades"},
-    {setor: "Biscoitos", describe: "Biscoitos e Bolachas"}
+    {sector: "GraosCereais", describe: "Grãos e Cereais"},
+    {sector: "Acougue", describe: "Açougue"},
+    {sector: "Frios", describe: "Frios"},
+    {sector: "Higiene", describe: "Higiene"},
+    {sector: "Limpeza", describe: "Produtos de Limpeza"},
+    {sector: "Laticinios", describe: "Laticínios"},
+    {sector: "Hortifruti", describe: "Frutas e Verduras"},
+    {sector: "Padaria", describe: "Padaria"},
+    {sector: "Adega", describe: "Adega"},
+    {sector: "Bebidas", describe: "Bebidas"},
+    {sector: "Enlatados", describe: "Enlatados"},
+    {sector: "Fitness", describe: "Fitness"},
+    {sector: "Outros", describe: "Outros"},
+    {sector: "Bazar", describe: "Bazar"},
+    {sector: "Pets", describe: "Pets"},
+    {sector: "Bebes", describe: "Bebês"},
+    {sector: "Doces", describe: "Doces e Chocolates"},
+    {sector: "Perfumaria", describe: "Perfumaria"},
+    {sector: "Utilidades", describe: "Utilidades"},
+    {sector: "Biscoitos", describe: "Biscoitos e Bolachas"}
   ]);
 
   const handleChangeColor = () => {
@@ -52,16 +53,16 @@ export const ProductContextProvider = ({ children }) => {
 
   useEffect(() => {
     const loadData = async () => {
-      const apiData = await ListProducts();
-      setProducts(apiData);
-      setLocalStorage("products", apiData);
-    
+      const apiData = await googleScriptClient("products", "GET"); //,{'cod': "417852369"}
+      const {status, message, ...body} = apiData; //apiData.finderProductByCod
+      setProducts(body.allProducts);
+      setLocalStorage("products", body.allProducts);
+      console.log('Products.:', body.allProducts);
     };
   
     loadData();
   }, []);
   
-
   return (
     <ProductContext.Provider
       value={{ products, setProducts, setor, setSetor, listImgProduct, pageColor,handleChangeColor }}
