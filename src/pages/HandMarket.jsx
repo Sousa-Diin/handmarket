@@ -56,6 +56,9 @@ const HandMarket = ({ onClick }) => {
           />
         </Container>
       </div>
+      <footer className="flex-row w-full h-12 bg-gray-800 text-white flex items-center justify-center">
+        <p className="text-[1rem] text-justify text-xs"> &copy; 2023 HandMarket. Todos os direitos reservados.</p>
+      </footer>
     </div>
   );
 };

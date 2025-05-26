@@ -57,7 +57,7 @@ export const ProductContextProvider = ({ children }) => {
       const {status, message, ...body} = apiData; //apiData.finderProductByCod
       setProducts(body.allProducts);
       setLocalStorage("products", body.allProducts);
-      console.log('Products.:', body.allProducts);
+      //console.log('Products.:', body.allProducts);
     };
   
     loadData();
