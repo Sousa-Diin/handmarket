@@ -9,6 +9,7 @@ const BASE_URL = `https://script.google.com/macros/s/${DEPLOYMENTCODE}/exec`;
 
 /**
  * Envia uma requisição para a API do Google Apps Script
+ * 
  * @param {string} rota - Ex: 'products', 'orders'
  * @param {string} metodo - 'GET' | 'POST'
  * @param {object} dados - Parâmetros a serem enviados
@@ -48,27 +49,3 @@ export const googleScriptClient = async (rota, metodo = 'GET', dados = {}) => {
     return { success: false, error };
   }
 };
-
-// Método para enviar dados para a planilha
-
-/* //Method: POST
-export const enviarParaPlanilha = async (evento) => {
-  try {
-   
-    fetch(` https://script.google.com/macros/s/${SPREADSHEET_ID}/dev`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: new URLSearchParams(Object.entries(evento))
-    })
-    .then(res => res.json())
-    .then(data => console.log("Resposta:", data))
-    .catch(err => console.error("Erro:", err));
-    
-    
-    
-  } catch (error) {
-    console.error("Erro de conexão com a API:", error);
-  }
-}; */
