@@ -30,14 +30,14 @@ export const googleScriptClient = async (rota, metodo = 'GET', dados = {}) => {
     }
 
     // POST (CREATE, UPDATE, DELETE)
-    const bodyParams = new URLSearchParams({ route: rota, ...dados });
+    const bodyParams = new URLSearchParams({ route: rota, method: methodUpper, ...dados });
 
     const response = await fetch(BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: new URLSearchParams(Object.entries(bodyParams.toString()))
+      body: bodyParams
     });
 
     const result = await response.json();

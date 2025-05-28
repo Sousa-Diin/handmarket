@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { useProduct } from "../context/ProductContextProvider";
 import Notie from "../service/notieService";
 import { setLocalStorage, getLocalStorage } from "../utils/localStorage";
+import { createProduct } from "../service/ProductsService.js"; // Adjust the import path as necessary
 
 const ProductForm = () => {
   const { setProducts, setor } = useProduct();
-  const [product, setProduct] = useState({ description: "", price: "",sector: "" });
+  const [product, setProduct] = useState({cod:"", description: "",descriptionnfce:"",
+    sector: "", count: 1, un: "", price: "" });
   const oldProducts = getLocalStorage("products") || []; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!product.description || !product.price || !product.sector) { 
+    if ( !product.description || !product.sector || !product.un || !product.price) { 
       Notie.error("Preencha todos os campos");
       return;
     }
@@ -19,23 +21,45 @@ const ProductForm = () => {
       ...prevProducts,
       {
         id: prevProducts.length + 1,
+        cod: (111+prevProducts.length), // Generate a unique code
         description: product.description,
-        price: parseFloat(product.price), 
+        descriptionNfce: product.description,
         sector: product.sector,
+        count: 1,
+        un: product.un,
+        price: parseFloat(product.price) 
       },
     ]);
 
-    setLocalStorage("products", [
+    /* setLocalStorage("products", [
       ...oldProducts,
       {
         id: oldProducts.length + 1,
+        cod: product.cod,
         description: product.description,
-        price: parseFloat(product.price),
+        descriptionnfce: product.description,
         sector: product.sector,
+        count: product.count,
+        un: product.un,
+        price: parseFloat(product.price) 
       },
-    ]);
+    ]); */
+
+    const generatedCod = "111" + oldProducts.length.toString();// exemplo simples
+    const fullProduct = {
+      cod: generatedCod,
+      description: product.description,
+      descriptionNfce: product.description, // repete por simplicidade
+      sector: product.sector,
+      count: 1,
+      un: product.un,
+      price: parseFloat(product.price)
+    };
+
+    createProduct(fullProduct);
+
     Notie.success("Produto adicionado com sucesso");
-    setProduct({ description: "", price: "", sector: "" }); // Reset the form fields
+    setProduct({description: "", sector: "",  un: "", price: "" }); // Reset the form fields
   };
 
   return (
@@ -48,6 +72,16 @@ const ProductForm = () => {
           onChange={(e) => setProduct({ ...product, description: (e.target.value).toUpperCase() })}
           className="border p-2 rounded w-full mb-2"
         />
+        <select 
+          value={product.un}
+          onChange={(e) => setProduct({ ...product, un: e.target.value })}
+          className="border p-2 rounded w-full mb-2"
+        >
+          <option value="">Selecione a Unidade</option>
+          <option value="UN">UN</option>
+          <option value="KG">KG</option>
+        </select>
+
         <input
           type="number"
           placeholder="Preço"
@@ -63,7 +97,7 @@ const ProductForm = () => {
           <option value="">Selecione o Setor</option>
           {setor.map((item) => (
             <option key={item.sector} value={item.sector}>
-              {item.description}
+              {item.describe}
             </option>
           ))}
         </select>
