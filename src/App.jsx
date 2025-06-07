@@ -21,7 +21,7 @@ function App() {
   });
 
   return (
-    <div style={{backgroundColor: pageColor.secondary}} className="flex flex-col items-center  w-full h-[100dvh] gap-1 text-[#c8e9e5]">
+    <div style={{backgroundColor: pageColor.secondary}} className="flex flex-col items-center  w-full h-[auto] gap-1 text-[#c8e9e5]">
       
       <div className=" w-full  flex flex-col items-center text-[#c8e9e5]">
        {page[openPage]}

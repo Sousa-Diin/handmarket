@@ -7,11 +7,19 @@ import Container from "../components/Container";
 import { useBuyList } from "../hooks/useBuyList";
 import { getLocalStorage } from "../utils/localStorage";
 import { useProduct } from "../context/ProductContextProvider";
+import Form from "../components/forms/Form";
 
 const HandMarket = ({ onClick }) => {
   const { lists, addList } = useBuyList();
   const allBuiesList = getLocalStorage("buiesList") ?? [];
-  const { pageColor, handleChangeColor } = useProduct();
+  const { pageColor, handleChangeColor, setor } = useProduct();
+  const productList = [
+    { description: "Código", type: "number", required:false, placeholder: "Digite o número" },
+    { description: "Descrição", type: "text", required:true, placeholder: "Digite a descrição" },
+    { description: "Setor", type: "text", required:true, options: setor, placeholder: "Selecione o setor" },
+    { description: "Unidade", type: "text", required:true, options: ['UN','KG'], placeholder: "Selecione a unidade" },
+    { description: "Preço", type: "number", required:true, placeholder: "Digite o preço" }
+  ]
 
   return (
     <div

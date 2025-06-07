@@ -9,6 +9,7 @@ export const createProduct = (dados) => googleScriptClient('products', 'POST', {
   ...dados
 });
 
+
 export const updateProduct = (dados) => googleScriptClient('products', 'POST', {
   method: 'UPDATE',
   ...dados

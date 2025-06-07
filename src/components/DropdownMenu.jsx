@@ -6,8 +6,8 @@ import { useProduct } from "../context/ProductContextProvider";
 const DropdownMenu = ({setOpenPage}) => {
   const { pageColor } = useProduct();
   return(
-    <section className={`fixed bottom-0 rounded-3xl p-3 w-[55dvw] h-[10dvh] 
-    flex  mb-4
+    <section className={`fixed bottom-0 rounded-3xl p-2 w-[55dvw] h-[10dvh] 
+    flex  mb-2
       justify-between items-center text-center text-sm font-bold
      gap-3 `} 
      style={{ display: "flex", flexDirection: "row", backgroundColor: pageColor.tertiary, color: pageColor.light }}>
